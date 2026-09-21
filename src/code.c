@@ -1,5 +1,5 @@
-//char * AUTHOR_NAME = (char *) "Jakub Pach";
-//char * AUTHOR_AUTHORSHIP = (char *) "I acknowledge that I have worked on this assignment independently, except where explicitly noted and referenced. Any collaboration or use of external resources has been properly cited. I am fully aware of the consequences of academic dishonesty and agree to abide by the university's academic integrity policy. I understand the seriousness and implications of plagiarism.";
+char * AUTHOR_NAME = (char *) "Sebastian Cardullo";
+char * AUTHOR_AUTHORSHIP = (char *) "I acknowledge that I have worked on this assignment independently, except where explicitly noted and referenced. Any collaboration or use of external resources has been properly cited. I am fully aware of the consequences of academic dishonesty and agree to abide by the university's academic integrity policy. I understand the seriousness and implications of plagiarism.";
 
 #include <stddef.h>
 #include <stdio.h>
@@ -54,7 +54,9 @@ int   sum_chain(Node *headPtr);
 
 void swap(int *aPtr, int *bPtr)
 {
-    // TODO
+    int temp = *aPtr;
+    *aPtr = *bPtr;
+    *bPtr = temp;
 }
 
 
@@ -78,8 +80,14 @@ void swap(int *aPtr, int *bPtr)
 
 char* find_last_char(char *sPtr)
 {
-    // TODO
-    return NULL;
+    if (sPtr == NULL || *sPtr == '\0') {
+        return NULL;
+    }
+    
+    while (*(sPtr + 1) != '\0') {
+        sPtr++;
+    }
+    return sPtr;
 }
 
 
@@ -97,7 +105,9 @@ char* find_last_char(char *sPtr)
 
 void link_three(Node *aPtr, Node *bPtr, Node *cPtr)
 {
-    // TODO
+    aPtr->nextPtr = bPtr;
+    bPtr->nextPtr = cPtr;
+    cPtr->nextPtr = NULL;
 }
 
 
@@ -114,7 +124,8 @@ void link_three(Node *aPtr, Node *bPtr, Node *cPtr)
 
 void remove_middle(Node *aPtr, Node *bPtr, Node *cPtr)
 {
-    // TODO
+    aPtr->nextPtr = cPtr;
+    bPtr->nextPtr = NULL;
 }
 
 
@@ -131,7 +142,7 @@ void remove_middle(Node *aPtr, Node *bPtr, Node *cPtr)
 
 void remove_last(Node *bPtr)
 {
-    // TODO
+    bPtr->nextPtr = NULL;
 }
 
 
@@ -147,7 +158,7 @@ void remove_last(Node *bPtr)
 
 void remove_first(Node *aPtr)
 {
-    // TODO
+    aPtr->nextPtr = NULL;
 }
 
 
@@ -172,7 +183,9 @@ void remove_first(Node *aPtr)
 
 void swap_ptrs(int **aPtrPtr, int **bPtrPtr)
 {
-    // TODO
+    int *tempPtr = *aPtrPtr;
+    *aPtrPtr = *bPtrPtr;
+    *bPtrPtr = tempPtr;
 }
 
 
@@ -197,7 +210,7 @@ void swap_ptrs(int **aPtrPtr, int **bPtrPtr)
 
 void nullify(int **ppPtr)
 {
-    // TODO
+    *ppPtr = NULL;
 }
 
 
@@ -224,7 +237,10 @@ void nullify(int **ppPtr)
 
 void assign_bytes(long long *nPtr)
 {
-    // TODO
+    unsigned char *bytePtr = (unsigned char *)nPtr;
+    for (int i = 0; i < 8; i++) {
+        bytePtr[i] = (unsigned char)(i + 1);
+    }
 }
 
 
@@ -246,6 +262,13 @@ void assign_bytes(long long *nPtr)
 
 int sum_chain(Node *headPtr)
 {
-    // TODO
-    return 0;
+    int total = 0;
+    Node *currentPtr = headPtr;
+
+    while (currentPtr != NULL) {
+        total += currentPtr->value;
+        currentPtr = currentPtr->nextPtr;
+    }
+
+    return total;
 }
